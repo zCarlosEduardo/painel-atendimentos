@@ -11,7 +11,7 @@ export function useAtendimentos() {
     }
 
     buscar();
-    const interval = setInterval(buscar, 30000);
+    const interval = setInterval(buscar, 5000);
     return () => clearInterval(interval);
   }, [setAtendimentos]);
 }

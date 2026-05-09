@@ -7,7 +7,7 @@ export const atendimentos = [
     departamento: "Analista de Cobrança",
     agente: "Carlos Eduardo",
     ultimaMensagem: "Carlos Eduardo",
-    dataUltimaMensagem: "2026-05-09T10:30:00",
+    dataUltimaMensagem: "2026-05-09T15:30:00",
     plataforma: "Zomo",
   },
   {
@@ -18,7 +18,7 @@ export const atendimentos = [
     departamento: "RH",
     agente: "Fernanda Lima",
     ultimaMensagem: "Fernanda Lima",
-    dataUltimaMensagem: "2026-05-09T11:45:00",
+    dataUltimaMensagem: "2026-05-09T16:00:00",
     plataforma: "Connecta",
   },
   {
@@ -29,7 +29,7 @@ export const atendimentos = [
     departamento: "Financeiro",
     agente: "Ricardo Souza",
     ultimaMensagem: "Ana Beatriz",
-    dataUltimaMensagem: "2026-05-09T08:10:00",
+    dataUltimaMensagem: "2026-05-09T16:10:00",
     plataforma: "Zomo",
   },
   {
@@ -40,7 +40,7 @@ export const atendimentos = [
     departamento: "Cobranca",
     agente: "Carlos Eduardo",
     ultimaMensagem: "Pedro Henrique",
-    dataUltimaMensagem: "2026-05-09T12:05:00",
+    dataUltimaMensagem: "2026-05-09T16:00:00",
     plataforma: "Connecta",
   },
   {
@@ -51,7 +51,7 @@ export const atendimentos = [
     departamento: "Suporte Técnico",
     agente: "Aline Torres",
     ultimaMensagem: "Aline Torres",
-    dataUltimaMensagem: "2026-05-09T07:00:00",
+    dataUltimaMensagem: "2026-05-09T16:00:00",
     plataforma: "Zomo",
   },
   {
