@@ -10,11 +10,31 @@ import { ordenarAtendimentos } from "@/utils/ordenar"
 import { calcularTempoSemResposta } from "@/utils/tempo"
 import { calcularStatus } from "@/utils/status"
 
+function SkeletonCard() {
+  return (
+    <div className="rounded-2xl p-4 flex flex-col gap-3 bg-gray-800 animate-pulse">
+      <div className="h-5 bg-gray-700 rounded w-3/4" />
+      <div className="flex flex-col gap-2 mt-1">
+        <div className="h-3 bg-gray-700 rounded w-full" />
+        <div className="h-3 bg-gray-700 rounded w-5/6" />
+        <div className="h-3 bg-gray-700 rounded w-4/6" />
+        <div className="h-3 bg-gray-700 rounded w-5/6" />
+      </div>
+      <div className="flex items-center justify-between mt-2 pt-3 border-t border-gray-700">
+        <div className="h-4 bg-gray-700 rounded w-1/3" />
+        <div className="h-6 bg-gray-700 rounded w-1/4" />
+      </div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   useAtendimentos()
   const now = useNow()
 
   const { atendimentos, filtroEmpresas, filtroDepartamentos, filtroPlatformas } = useAtendimentosStore((s) => s)
+
+  const carregando = atendimentos.length === 0
 
   const atendimentosFiltrados = atendimentos
     .filter((a) => filtroEmpresas.length === 0 || filtroEmpresas.includes(a.empresa))
@@ -40,39 +60,52 @@ export default function HomePage() {
       <Header />
       <main className="p-6 flex flex-col gap-8">
 
-        {aguardandoAssociado.length > 0 && (
+        {carregando ? (
           <section>
-            <h2 className="text-gray-400 text-sm uppercase tracking-widest mb-3">
-              Aguardando Associado ({aguardandoAssociado.length})
-            </h2>
+            <div className="h-4 bg-gray-800 rounded w-48 mb-3 animate-pulse" />
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-              {aguardandoAssociado.map((atendimento) => (
-                <AtendimentoCard
-                  key={atendimento.id}
-                  atendimento={atendimento}
-                  now={now}
-                  aguardandoAssociado={true}
-                />
+              {Array.from({ length: 6 }).map((_, i) => (
+                <SkeletonCard key={i} />
               ))}
             </div>
           </section>
-        )}
+        ) : (
+          <>
+            {aguardandoAssociado.length > 0 && (
+              <section>
+                <h2 className="text-gray-400 text-sm uppercase tracking-widest mb-3">
+                  Aguardando Associado ({aguardandoAssociado.length})
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+                  {aguardandoAssociado.map((atendimento) => (
+                    <AtendimentoCard
+                      key={atendimento.id}
+                      atendimento={atendimento}
+                      now={now}
+                      aguardandoAssociado={true}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
 
-        <section>
-          <h2 className="text-gray-400 text-sm uppercase tracking-widest mb-3">
-            Aguardando Agente ({aguardandoAgente.length})
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
-            {aguardandoAgente.map((atendimento) => (
-              <AtendimentoCard
-                key={atendimento.id}
-                atendimento={atendimento}
-                now={now}
-                aguardandoAssociado={false}
-              />
-            ))}
-          </div>
-        </section>
+            <section>
+              <h2 className="text-gray-400 text-sm uppercase tracking-widest mb-3">
+                Aguardando resposta ({aguardandoAgente.length})
+              </h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
+                {aguardandoAgente.map((atendimento) => (
+                  <AtendimentoCard
+                    key={atendimento.id}
+                    atendimento={atendimento}
+                    now={now}
+                    aguardandoAssociado={false}
+                  />
+                ))}
+              </div>
+            </section>
+          </>
+        )}
 
       </main>
     </div>

@@ -1,0 +1,7 @@
+services:
+  painel:
+    build: .
+    container_name: painel-atendimentos
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
