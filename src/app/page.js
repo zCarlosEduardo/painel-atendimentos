@@ -56,14 +56,13 @@ export default function HomePage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className="min-h-screen text-white">
       <Header />
-      <main className="p-6 flex flex-col gap-8">
-
+      <main className="p-3 sm:p-6 flex flex-col gap-6 sm:gap-8">
         {carregando ? (
           <section>
             <div className="h-4 bg-gray-800 rounded w-48 mb-3 animate-pulse" />
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3">
               {Array.from({ length: 6 }).map((_, i) => (
                 <SkeletonCard key={i} />
               ))}
@@ -73,10 +72,10 @@ export default function HomePage() {
           <>
             {aguardandoAssociado.length > 0 && (
               <section>
-                <h2 className="text-gray-400 text-sm uppercase tracking-widest mb-3">
+                <h2 className="text-gray-400 text-xs sm:text-sm uppercase tracking-widest mb-3">
                   Aguardando Associado ({aguardandoAssociado.length})
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3">
                   {aguardandoAssociado.map((atendimento) => (
                     <AtendimentoCard
                       key={atendimento.id}
@@ -90,10 +89,10 @@ export default function HomePage() {
             )}
 
             <section>
-              <h2 className="text-gray-400 text-sm uppercase tracking-widest mb-3">
-                Aguardando resposta ({aguardandoAgente.length})
+              <h2 className="text-gray-400 text-xs sm:text-sm uppercase tracking-widest mb-3">
+                Aguardando Agente ({aguardandoAgente.length})
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8 gap-3">
                 {aguardandoAgente.map((atendimento) => (
                   <AtendimentoCard
                     key={atendimento.id}
@@ -106,7 +105,6 @@ export default function HomePage() {
             </section>
           </>
         )}
-
       </main>
     </div>
   )

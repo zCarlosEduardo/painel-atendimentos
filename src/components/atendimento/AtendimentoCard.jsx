@@ -25,7 +25,7 @@ function Row({ icon: Icon, label, value, muted }) {
     <div className="flex items-start gap-2 text-md">
       <Icon className={`h-4 w-4 mt-0.5 shrink-0 ${muted}`} />
       <div className="min-w-0 flex-1">
-        <span className={`${muted} text-md uppercase tracking-wider mr-1`}>
+        <span className={`${muted} text-md tracking-wider mr-1`}>
           {label}
         </span>
         <span className="font-medium wrap-break-word">{value}</span>
