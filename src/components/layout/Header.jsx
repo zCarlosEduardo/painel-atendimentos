@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useAtendimentosStore } from "@/store/atendimentosStore";
 import { mapearDepartamento } from "@/utils/mapearDepartamento";
+import { toTitleCase } from "@/utils/normalizar";
 
 function Dropdown({ label, opcoes, selecionados, onToggle }) {
   const [aberto, setAberto] = useState(false);
@@ -40,7 +41,7 @@ function Dropdown({ label, opcoes, selecionados, onToggle }) {
       </button>
 
       <div
-        className={`absolute top-full left-0 mt-2 bg-gray-800 border border-gray-700 rounded-md shadow-xl z-[70] min-w-full md:min-w-48 overflow-hidden transition-all duration-200 ${
+        className={`absolute top-full left-0 mt-2 bg-gray-800 border border-gray-700 rounded-md shadow-xl z-70 min-w-full md:min-w-48 overflow-hidden transition-all duration-200 ${
           aberto ? "max-h-96 opacity-100 visible" : "max-h-0 opacity-0 invisible pointer-events-none"
         }`}
       >
@@ -51,7 +52,7 @@ function Dropdown({ label, opcoes, selecionados, onToggle }) {
               onClick={() => onToggle(opcao)}
               className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors text-left"
             >
-              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 ${
                 selecionados.length === 0 || selecionados.includes(opcao) ? "bg-blue-600 border-blue-600" : "border-gray-500"
               }`}>
                 {(selecionados.length === 0 || selecionados.includes(opcao)) && (
@@ -81,14 +82,14 @@ export function Header() {
     limparFiltros,
   } = useAtendimentosStore((s) => s);
 
-  const empresas = [...new Set(atendimentos.map((a) => a.empresa))];
+  const empresas = [...new Set(atendimentos.map((a) => toTitleCase(a.empresa)))];
   const departamentos = [...new Set(atendimentos.map((a) => mapearDepartamento(a.departamento)))];
   const plataformas = [...new Set(atendimentos.map((a) => a.plataforma))];
 
   const totalFiltrosAtivos = filtroEmpresas.length + filtroDepartamentos.length + filtroPlatformas.length;
 
   return (
-    <header className="text-white relative z-[60]">
+    <header className="text-white relative z-60">
       <div className="flex items-center justify-between px-6 py-4">
         <h1 className="text-2xl font-bold tracking-wide">
           Painel de Atendimentos
@@ -121,12 +122,12 @@ export function Header() {
               selecionados={filtroDepartamentos}
               onToggle={toggleFiltroDepartamento}
             />
-            <Dropdown
+            {/* <Dropdown
               label="Plataforma"
               opcoes={plataformas}
               selecionados={filtroPlatformas}
               onToggle={toggleFiltroPlatforma}
-            />
+            /> */}
             
             {totalFiltrosAtivos > 0 && (
               <button
